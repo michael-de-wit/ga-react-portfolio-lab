@@ -47,12 +47,19 @@ function App() {
     <li key={index}>{skill.frontEnd  
         ? `Front end - ${skill.name} @ ${skill.comfort} comfort + ${skill.challenge} challenge` 
         : (skill.backEnd 
-            ? `Back end - ${skill.name}@ ${skill.comfort} comfort + ${skill.challenge} challenge` 
-            : `Other - ${skill.name}@ ${skill.comfort} comfort + ${skill.challenge} challenge`
+            ? `Back end - ${skill.name} @ ${skill.comfort} comfort + ${skill.challenge} challenge` 
+            : `Other - ${skill.name} @ ${skill.comfort} comfort + ${skill.challenge} challenge`
           ) 
         }
     </li>
   )
+
+  const liStyle = {
+    color: `#333333`,
+    fontWeight: `800`,
+    fontSize: `1.5rem`,
+    textAlign: `left`,
+  }
 
   // See https://2019.wattenberger.com/blog/react-and-d3
   const svgRef = useRef()
@@ -79,7 +86,7 @@ function App() {
 
   return (
     <>
-      <ul>{frontEndSkillList}</ul>
+      <ul style={liStyle}>{frontEndSkillList}</ul>
       <svg ref={svgRef} />
       <Circle/>
     </>
