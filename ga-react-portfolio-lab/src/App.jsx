@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react';
+import * as d3 from 'd3';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -17,7 +18,7 @@ function App() {
       comfort: 8,
       challenge: 2,
       frontEnd: true,
-      backend: false
+      backEnd: false
     },
     {
       name:'HTML',
@@ -43,15 +44,46 @@ function App() {
   ]
 
   const frontEndSkillList = mySkills.map((skill, index) =>
-    <li key={index}>{skill.frontEnd ? `Front end - ${skill.name}` : (skill.backEnd ? `Back end - ${skill.name}` : `Other - ${skill.name}`) }</li>
+    <li key={index}>{skill.frontEnd  
+        ? `Front end - ${skill.name} @ ${skill.comfort} comfort + ${skill.challenge} challenge` 
+        : (skill.backEnd 
+            ? `Back end - ${skill.name}@ ${skill.comfort} comfort + ${skill.challenge} challenge` 
+            : `Other - ${skill.name}@ ${skill.comfort} comfort + ${skill.challenge} challenge`
+          ) 
+        }
+    </li>
   )
+
+  // See https://2019.wattenberger.com/blog/react-and-d3
+  const svgRef = useRef()
+
+  const Circle = () => {
+    return (
+      <svg 
+        width="300" 
+        height="154" 
+        style={{
+          border: "2px solid gold"
+        }}>
+        <circle
+          cx="150"
+          cy="77"
+          r="40"
+          fill="red"
+        />
+      </svg>
+    );
+  };
 
 
 
   return (
     <>
       <ul>{frontEndSkillList}</ul>
+      <svg ref={svgRef} />
+      <Circle/>
     </>
+
   )
 }
 
